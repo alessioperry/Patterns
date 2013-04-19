@@ -12,8 +12,8 @@ namespace Patterns.FactoryMethod
     //complex class is completly protected to external env
     public class Complex
     {
-        public readonly double real{get; private set;}
-        public readonly double imaginary{get; private set;}
+        public double real { get; private set; }
+        public double imaginary { get; private set; }
  
         //desired constructor
         public static Complex FromCartesianFactory(double real, double imaginary ) 

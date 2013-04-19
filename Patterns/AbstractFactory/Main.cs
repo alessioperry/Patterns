@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Patterns.AstractFactory
+namespace Patterns.AbstractFactory
 {
     //Provide an interface for creating families of related or dependent objects 
     //without specifying their concrete classes.
@@ -14,7 +10,7 @@ namespace Patterns.AstractFactory
         void Paint();
     }
 
-    public class OSXButton : IButton // Executes fourth if OS:OSX
+    public class OsxButton : IButton // Executes fourth if OS:OSX
     {
         public void Paint()
         {
@@ -30,22 +26,22 @@ namespace Patterns.AstractFactory
         }
     }
 
-    public interface IGUIFactory
+    public interface IGuiFactory
     {
         IButton CreateButton();
     }
 
-    public class OSXFactory : IGUIFactory // Executes third if OS:OSX
+    public class OsxFactory : IGuiFactory // Executes third if OS:OSX
     {
-        IButton CreateButton()
+        public IButton CreateButton()
         {
-            return new OSXButton();
+            return new OsxButton();
         }
     }
 
-    public class WinFactory : IGUIFactory // Executes third if OS:WIN
+    public class WinFactory : IGuiFactory // Executes third if OS:WIN
     {
-        IButton CreateButton()
+        public IButton CreateButton()
         {
             return new WinButton();
         }
@@ -53,17 +49,9 @@ namespace Patterns.AstractFactory
 
     public class ApplicationRunner
     {
-        static IGUIFactory CreateOsSpecificFactory()  // Executes second
+        static IGuiFactory CreateOsSpecificFactory()  // Executes second
         {
-            string sysType = "Win";
-            if (sysType == "Win")
-            {
-                return new WinFactory();
-            }
-            else
-            {
-                return new OSXFactory();
-            }
+            return new WinFactory();
         }
 
         static void Main(string[] args) // Executes first
